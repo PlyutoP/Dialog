@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+</head>
+<body>
+    <form
+  id="app"
+  @submit="checkForm"
+  action="https://vuejs.org/"
+  method="post"
+>
+
+  <p v-if="errors.length">
+    <b>Пожалуйста исправьте указанные ошибки:</b>
+    <ul>
+      <li v-for="error in errors">{{ error }}</li>
+    </ul>
+  </p>
+
+  <p>
+    <label for="login">Логин</label>
+  </p>
+  <p>
+    <input
+      id="login"
+      v-model="login"
+      type="text"
+      name="login"
+    >
+  </p>
+
+  <p>
+    <label for="password">Пароль</label>
+   </p>
+  <p>
+    <input
+      id="password"
+      v-model="password"
+      type="text"
+      name="password"
+    >
+  </p>
+
+  <p>
+    <input
+      type="submit"
+      value="Отправить"
+    >
+  </p>
+
+</form>
+    <script>
+    	const app = new Vue({
+  el: '#app',
+  data: {
+    errors: [],
+    login: null,
+    password: null,
+  },
+  methods: {
+    checkForm: function (e) {
+      if (this.login && this.password) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.login) {
+        this.errors.push('Требуется указать логин.');
+      }
+      if (!this.password) {
+        this.errors.push('Требуется указать пароль.');
+      }
+
+      e.preventDefault();
+    }
+  }
+})
+    </script>
+</body>
+</html>
